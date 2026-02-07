@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "bash": {
+      "command": "npx",
+      "args": ["-y", "shell-mcp-server"],
+      "env": {}
+    }
+  }
+}
