@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claud Code Skills - ニュース</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <h1 class="header__title">Claud Code Skills</h1>
+      <p class="header__subtitle">ニュース & アップデート</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="filters">
+      <button class="filter-btn active" data-category="all">すべて</button>
+      <button class="filter-btn" data-category="release">リリース</button>
+      <button class="filter-btn" data-category="tips">Tips</button>
+      <button class="filter-btn" data-category="update">アップデート</button>
+      <button class="filter-btn" data-category="event">イベント</button>
+    </section>
+
+    <section id="news-list" class="news-list">
+      <!-- News items are rendered by JavaScript -->
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2026 Claud Code Skills</p>
+    </div>
+  </footer>
+
+  <script src="js/news-data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
