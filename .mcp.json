@@ -9,7 +9,7 @@
       "command": "npx",
       "args": ["-y", "@modelcontextprotocol/server-notion"],
       "env": {
-        "NOTION_INTERNAL_INTEGRATION_TOKEN": "YOUR_NOTION_TOKEN_HERE"
+        "NOTION_INTERNAL_INTEGRATION_TOKEN": "${NOTION_INTERNAL_INTEGRATION_TOKEN}"
       }
     }
   }
