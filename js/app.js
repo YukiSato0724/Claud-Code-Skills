@@ -22,14 +22,22 @@
       ? `<a class="news-card__link" href="${item.link}" target="_blank" rel="noopener noreferrer">詳しく見る &rarr;</a>`
       : "";
 
+    const sourceHtml = item.sourceUrl
+      ? `<div class="news-card__source">
+          <span class="news-card__source-label">出典:</span>
+          <a class="news-card__source-link" href="${item.sourceUrl}" target="_blank" rel="noopener noreferrer">${item.sourceName || item.sourceUrl}</a>
+        </div>`
+      : "";
+
     return `
       <article class="news-card">
         <div class="news-card__meta">
-          <time class="news-card__date" datetime="${item.date}">${formatDate(item.date)}</time>
+          <time class="news-card__date" datetime="${item.date}">${formatDate(item.date)} 公開</time>
           <span class="news-card__category news-card__category--${item.category}">${CATEGORY_LABELS[item.category] || item.category}</span>
         </div>
         <h2 class="news-card__title">${item.title}</h2>
         <p class="news-card__body">${item.body}</p>
+        ${sourceHtml}
         ${linkHtml}
       </article>
     `;

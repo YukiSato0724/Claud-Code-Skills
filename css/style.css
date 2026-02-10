@@ -168,6 +168,29 @@ body {
   line-height: 1.7;
 }
 
+.news-card__source {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 12px;
+  font-size: 0.8rem;
+}
+
+.news-card__source-label {
+  color: var(--color-text-secondary);
+  flex-shrink: 0;
+}
+
+.news-card__source-link {
+  color: var(--color-release);
+  text-decoration: none;
+  word-break: break-all;
+}
+
+.news-card__source-link:hover {
+  text-decoration: underline;
+}
+
 .news-card__link {
   display: inline-block;
   margin-top: 12px;
