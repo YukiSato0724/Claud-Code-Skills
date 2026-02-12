@@ -189,6 +189,28 @@ body {
   font-size: 0.95rem;
 }
 
+/* Tools Navigation */
+.tools-nav {
+  padding: 24px 0;
+  text-align: center;
+}
+
+.tools-nav__link {
+  display: inline-block;
+  padding: 12px 28px;
+  background: var(--color-primary);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 8px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  transition: background 0.2s ease;
+}
+
+.tools-nav__link:hover {
+  background: #b45309;
+}
+
 /* Footer */
 .footer {
   margin-top: auto;

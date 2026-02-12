@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ペルソナインタビューエージェント - Claud Code Skills</title>
+  <link rel="stylesheet" href="css/persona-interview.css">
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <a href="index.html" class="header__back">&larr; トップへ戻る</a>
+      <h1 class="header__title">ペルソナインタビューエージェント</h1>
+      <p class="header__subtitle">キーワードから自動でリサーチ・仮説立案・ペルソナ生成・インタビューを実施</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Setup Section -->
+    <section class="setup" id="setup">
+      <div class="setup__row">
+        <div class="setup__field">
+          <label class="setup__label" for="api-key">Anthropic API Key</label>
+          <input class="setup__input" type="password" id="api-key" placeholder="sk-ant-..." autocomplete="off">
+          <p class="setup__hint">APIキーはブラウザ上でのみ使用され、サーバーには送信されません。</p>
+        </div>
+        <div class="setup__field setup__field--model">
+          <label class="setup__label" for="model-select">モデル</label>
+          <select class="setup__select" id="model-select">
+            <option value="claude-sonnet-4-20250514">Claude Sonnet 4</option>
+            <option value="claude-opus-4-20250514">Claude Opus 4</option>
+          </select>
+        </div>
+      </div>
+      <div class="setup__field">
+        <label class="setup__label" for="keyword">調査キーワード</label>
+        <input class="setup__input" type="text" id="keyword" placeholder="例: リモートワーク, 健康食品, サブスクリプション...">
+      </div>
+      <div class="setup__actions">
+        <button class="btn btn--primary" id="start-btn">エージェント開始</button>
+        <button class="btn btn--danger" id="stop-btn" style="display:none;">中止</button>
+      </div>
+    </section>
+
+    <!-- Progress Stepper -->
+    <section class="stepper" id="stepper" style="display:none;">
+      <div class="stepper__step" data-step="1">
+        <div class="stepper__indicator">1</div>
+        <span class="stepper__label">リサーチ</span>
+      </div>
+      <div class="stepper__line"></div>
+      <div class="stepper__step" data-step="2">
+        <div class="stepper__indicator">2</div>
+        <span class="stepper__label">仮説立案</span>
+      </div>
+      <div class="stepper__line"></div>
+      <div class="stepper__step" data-step="3">
+        <div class="stepper__indicator">3</div>
+        <span class="stepper__label">ペルソナ生成</span>
+      </div>
+      <div class="stepper__line"></div>
+      <div class="stepper__step" data-step="4">
+        <div class="stepper__indicator">4</div>
+        <span class="stepper__label">インタビュー</span>
+      </div>
+      <div class="stepper__line"></div>
+      <div class="stepper__step" data-step="5">
+        <div class="stepper__indicator">5</div>
+        <span class="stepper__label">インサイト抽出</span>
+      </div>
+    </section>
+
+    <!-- Results -->
+    <section id="results" class="results"></section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2026 Claud Code Skills</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/marked@15.0.0/marked.min.js"></script>
+  <script src="js/persona-interview-agent.js"></script>
+</body>
+</html>
