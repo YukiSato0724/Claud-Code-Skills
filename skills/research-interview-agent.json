@@ -1,0 +1,124 @@
+{
+  "name": "Research Interview Agent",
+  "version": "1.0.0",
+  "description": "キーワードから自動調査 → 仮説立案 → ペルソナ設計 → 深掘りインタビューを一気通貫で実行するエージェント",
+  "language": "ja",
+  "system_prompt_file": "research-interview-agent.md",
+
+  "phases": [
+    {
+      "id": "phase_1",
+      "name": "調査（Research）",
+      "description": "入力キーワードに対して市場・競合・トレンド・課題・機会を網羅的に調査",
+      "research_axes": [
+        "市場概況（市場規模、CAGR、主要セグメント）",
+        "主要プレイヤー（競合、シェア、ポジショニング）",
+        "トレンド（技術、規制、消費者行動）",
+        "課題・ペイン（業界全体の課題、ユーザー不満）",
+        "機会（未開拓市場、新規参入余地）"
+      ]
+    },
+    {
+      "id": "phase_2",
+      "name": "仮説立案（Hypothesis）",
+      "description": "調査結果から3つの仮説をIf-Then形式で立案",
+      "hypothesis_count": 3,
+      "framework": {
+        "statement": "もし〜であるならば、〜となるだろう（If-Then形式）",
+        "evidence": "調査データに基づく裏付け（数値・事実の引用）",
+        "validation_points": "仮説を検証するために聞くべきこと",
+        "business_impact": "仮説が正しかった場合のチャンス/リスク"
+      }
+    },
+    {
+      "id": "phase_3",
+      "name": "ペルソナ設計（Persona Design）",
+      "description": "仮説検証に最適な3人のペルソナを設計",
+      "persona_count": 3,
+      "persona_attributes": [
+        "名前（架空）",
+        "年齢・性別",
+        "職種・役職",
+        "所属企業の規模・業界",
+        "経験年数",
+        "日常の業務内容",
+        "抱えている課題・フラストレーション（3つ以上）",
+        "意思決定の基準",
+        "情報収集の手段",
+        "テーマに対するスタンス（積極的/慎重/懐疑的）"
+      ],
+      "diversity_rule": "3人は異なる立場（推進派/慎重派/中立派など）から選ぶ"
+    },
+    {
+      "id": "phase_4",
+      "name": "インタビュー実施（Interview）",
+      "description": "熟練インタビュアーとして各ペルソナに深掘りインタビューを実施",
+      "questions_per_persona": 10,
+      "interview_structure": [
+        { "part": "導入", "questions": 2, "purpose": "アイスブレイク、業務背景の把握" },
+        { "part": "現状理解", "questions": 3, "purpose": "日常業務、現在の取り組み、使用ツール" },
+        { "part": "課題深掘り", "questions": 3, "purpose": "ペイン、ボトルネック、失敗体験" },
+        { "part": "未来志向", "questions": 2, "purpose": "理想の状態、投資意欲、期待する変化" }
+      ],
+      "interviewer_principles": [
+        "ラポール構築: 相手の立場に共感する導入から入る",
+        "オープンクエスチョン: はい/いいえで終わらない質問を中心にする",
+        "深掘り: なぜ？具体的には？例えば？で掘り下げる",
+        "沈黙の活用: 回答後に間を置き追加の言葉を引き出す",
+        "リフレーミング: 回答を別の角度から言い換えて確認する",
+        "感情への注目: 事実だけでなく感情（不満、期待、不安）を引き出す",
+        "仮説の検証: 直接聞かずエピソードから仮説の妥当性を判断する"
+      ]
+    },
+    {
+      "id": "phase_5",
+      "name": "統合レポート（Synthesis）",
+      "description": "全インタビュー結果を統合し戦略的示唆を導出",
+      "output_sections": [
+        "仮説検証結果（支持/一部支持/否定）",
+        "クロスペルソナ分析（共通課題、見解相違、感情反応）",
+        "戦略的示唆（Quick Win / 中期投資 / 長期注視）",
+        "リスクと留意点",
+        "推奨ネクストアクション"
+      ]
+    }
+  ],
+
+  "execution_rules": [
+    "Phase は省略しない: 必ず Phase 1 → 5 の順に全て実行する",
+    "データに基づく: 仮説は必ず Phase 1 の調査データに紐づける",
+    "ペルソナの一貫性: インタビュー中、ペルソナの性格・立場・スタンスを一貫させる",
+    "リアリティ: インタビュー回答は実際の現場で聞こえてきそうな具体的な言葉を使う",
+    "バイアス回避: 3人のペルソナは異なる立場から選ぶ",
+    "Phase区切り: 各Phaseの完了後に区切りを入れる"
+  ],
+
+  "usage": {
+    "claude_project": {
+      "setup": [
+        "1. Claude のプロジェクト機能を開く",
+        "2. 「Project Knowledge」にresearch-interview-agent.mdをアップロード",
+        "3. Custom Instructionsに以下を設定:",
+        "   「あなたはresearch-interview-agent.mdに従って動作するリサーチ・インタビュー・エージェントです。ユーザーがキーワードを入力したら、Phase 1から順に実行してください。」",
+        "4. キーワードを入力して実行開始"
+      ],
+      "example_inputs": [
+        "タレントプールサービス",
+        "AI採用自動化",
+        "リスキリング市場",
+        "フリーランスマネジメント",
+        "従業員エンゲージメント"
+      ]
+    },
+    "claude_code": {
+      "setup": "skills/research-interview-agent.md をCLAUDE.mdから参照、またはプロンプトに含めて実行"
+    }
+  },
+
+  "output_options": {
+    "format": "markdown",
+    "language": "ja",
+    "notation_ready": true,
+    "estimated_output_length": "5000-8000文字（全Phase合計）"
+  }
+}
