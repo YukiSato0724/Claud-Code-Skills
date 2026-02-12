@@ -1,0 +1,299 @@
+{
+  "agent": {
+    "name": "ペルソナインタビューエージェント",
+    "version": "1.0.0",
+    "description": "キーワードから自動でリサーチ・仮説立案・ペルソナ生成・デプスインタビュー・インサイト抽出を行うエージェント",
+    "language": "ja"
+  },
+  "workflow": {
+    "auto_progress": true,
+    "phases": [
+      {
+        "id": "research",
+        "phase_number": 1,
+        "name": "リサーチ（市場・ユーザー調査）",
+        "header": "【Phase 1/5: リサーチ（市場・ユーザー調査）】",
+        "description": "キーワードに関する包括的な市場・ユーザー調査を実施",
+        "input": "keyword",
+        "estimated_length": "1500〜2500字",
+        "sections": [
+          {
+            "id": "overview",
+            "title": "概要",
+            "description": "キーワードの定義と市場における位置づけ"
+          },
+          {
+            "id": "market_trends",
+            "title": "市場動向",
+            "description": "市場規模、競合状況、最新トレンド"
+          },
+          {
+            "id": "target_users",
+            "title": "ターゲットユーザー像",
+            "description": "利用者層、利用シーン、行動パターン"
+          },
+          {
+            "id": "pain_points",
+            "title": "ユーザーの課題・ペインポイント",
+            "description": "顕在的課題、潜在的不満、未充足ニーズ"
+          },
+          {
+            "id": "social_context",
+            "title": "社会的・文化的背景",
+            "description": "社会トレンド、価値観の変化、テクノロジーの影響"
+          }
+        ]
+      },
+      {
+        "id": "hypotheses",
+        "phase_number": 2,
+        "name": "仮説立案",
+        "header": "【Phase 2/5: 仮説立案】",
+        "description": "リサーチ結果を元にユーザーインタビューで検証すべき仮説を5つ立案",
+        "input": "phase_1_output",
+        "estimated_length": "1500〜2000字",
+        "hypothesis_count": 5,
+        "required_perspectives": [
+          {
+            "id": "behavioral",
+            "name": "行動面の仮説",
+            "description": "ユーザーの具体的な行動パターンに関するもの"
+          },
+          {
+            "id": "emotional",
+            "name": "感情面の仮説",
+            "description": "ユーザーの感情・気持ちに関するもの"
+          },
+          {
+            "id": "values",
+            "name": "価値観の仮説",
+            "description": "ユーザーの深層の価値観に関するもの"
+          },
+          {
+            "id": "social",
+            "name": "社会的要因の仮説",
+            "description": "他者との関係や社会的影響に関するもの"
+          },
+          {
+            "id": "unmet_needs",
+            "name": "未充足ニーズの仮説",
+            "description": "まだ満たされていない潜在的ニーズに関するもの"
+          }
+        ],
+        "hypothesis_structure": {
+          "title": "仮説タイトル",
+          "statement": "「〜は〜だろう」形式の検証可能な仮説文",
+          "rationale": "背景・根拠",
+          "validation_points": "インタビューで確認すべき具体的な質問や観点",
+          "expected_impact": "仮説が正しかった場合のビジネスへの示唆"
+        }
+      },
+      {
+        "id": "personas",
+        "phase_number": 3,
+        "name": "ペルソナ生成",
+        "header": "【Phase 3/5: ペルソナ生成】",
+        "description": "リサーチ結果と仮説に基づき3人の詳細なペルソナを作成",
+        "input": "phase_1_output + phase_2_output",
+        "estimated_length": "2000〜3000字",
+        "persona_count": 3,
+        "persona_structure": {
+          "basic_info": {
+            "fields": ["年齢", "性別", "職業", "居住地", "家族構成", "年収帯"]
+          },
+          "personality": {
+            "fields": ["性格特性（ビッグファイブ）", "核となる価値観", "意思決定スタイル"]
+          },
+          "lifestyle": {
+            "fields": ["平日の過ごし方", "休日の過ごし方", "趣味・関心事"]
+          },
+          "keyword_relation": {
+            "fields": ["現在の利用状況", "きっかけ", "利用頻度", "関連する行動"]
+          },
+          "pain_points": {
+            "min_count": 3,
+            "include_emotions": true
+          },
+          "needs": {
+            "types": ["顕在的ニーズ", "潜在的ニーズ"]
+          },
+          "information_sources": {
+            "fields": ["メディア", "SNS", "情報収集方法"]
+          },
+          "quotes": {
+            "count": 3,
+            "description": "この人物が日常で言いそうなセリフ"
+          }
+        },
+        "diversity_requirements": [
+          "異なる年齢層・ライフステージ",
+          "異なる利用状況・関与度",
+          "異なるニーズ・モチベーション"
+        ]
+      },
+      {
+        "id": "interviews",
+        "phase_number": 4,
+        "name": "デプスインタビュー",
+        "header": "【Phase 4/5: デプスインタビュー】",
+        "description": "3人のペルソナそれぞれに対して熟練インタビュアーが深層インタビューを実施",
+        "input": "phase_3_output",
+        "estimated_length": "各ペルソナ2000〜3000字（合計6000〜9000字）",
+        "interview_count": 3,
+        "min_exchanges_per_interview": 15,
+        "interviewer_profile": {
+          "experience": "UXリサーチ歴15年以上",
+          "style": "温かく受容的だが鋭い洞察力を持つ",
+          "strength": "対象者が安心して本音を語れる雰囲気を作る"
+        },
+        "techniques": [
+          {
+            "id": "laddering",
+            "name": "ラダリング法",
+            "description": "「なぜ？」を繰り返し、表層から深層の価値観へ掘り下げる",
+            "example_questions": [
+              "なぜそう思うのですか？",
+              "それはあなたにとってどういう意味がありますか？",
+              "その奥にある気持ちを教えてもらえますか？"
+            ]
+          },
+          {
+            "id": "critical_incident",
+            "name": "クリティカルインシデント法",
+            "description": "具体的なエピソードや体験を詳細に語ってもらう",
+            "example_questions": [
+              "最近の具体的なエピソードを教えてください",
+              "その時どう感じましたか？",
+              "その場面をもう少し詳しく思い出してもらえますか？"
+            ]
+          },
+          {
+            "id": "projection",
+            "name": "投影法",
+            "description": "第三者視点で語らせることで本音を引き出す",
+            "example_questions": [
+              "あなたの友人が同じ立場だったら、どうアドバイスしますか？",
+              "理想的な世界があるとしたら、どう変わっていてほしいですか？",
+              "10年後の自分に聞けるとしたら、何を聞きますか？"
+            ]
+          },
+          {
+            "id": "emotion_mapping",
+            "name": "感情マッピング",
+            "description": "体験の各段階での感情の変化を丁寧に追跡する",
+            "example_questions": [
+              "その体験の中で、一番気持ちが動いた瞬間はいつですか？",
+              "その前後で気持ちはどう変わりましたか？",
+              "今振り返って、どんな感情が湧いてきますか？"
+            ]
+          }
+        ],
+        "interview_flow": [
+          {
+            "section": "導入",
+            "exchanges": "2〜3往復",
+            "purpose": "ラポール構築、日常的な話題から始めて緊張をほぐす"
+          },
+          {
+            "section": "行動の把握",
+            "exchanges": "3〜4往復",
+            "purpose": "具体的な行動パターン、利用状況、日常での位置づけを把握"
+          },
+          {
+            "section": "深掘り",
+            "exchanges": "4〜5往復",
+            "purpose": "行動の背景にある動機・感情を探索、具体的エピソードの引き出し"
+          },
+          {
+            "section": "価値観の探索",
+            "exchanges": "3〜4往復",
+            "purpose": "より深い価値観、アイデンティティ、人生における位置づけ"
+          },
+          {
+            "section": "まとめ",
+            "exchanges": "1〜2往復",
+            "purpose": "振り返り、言い残したこと、追加コメント"
+          }
+        ],
+        "realism_requirements": {
+          "interviewee_expressions": [
+            "ためらい（「うーん…」「そうですね…」）",
+            "言い直し（「いや、正確に言うと…」）",
+            "感情表現（笑い、困惑、熱意）",
+            "沈黙や考え込み（「……」）",
+            "話の脱線と復帰"
+          ],
+          "interviewer_behaviors": [
+            "相槌（「なるほど」「興味深いですね」）",
+            "共感の表明",
+            "前の発言を踏まえた掘り下げ",
+            "適切なタイミングでの話題転換"
+          ]
+        }
+      },
+      {
+        "id": "insights",
+        "phase_number": 5,
+        "name": "インサイト抽出",
+        "header": "【Phase 5/5: インサイト抽出】",
+        "description": "3件のインタビュー結果を横断分析し実用的なインサイトを導出",
+        "input": "phase_2_output + phase_4_output",
+        "estimated_length": "2000〜3000字",
+        "sections": [
+          {
+            "id": "key_insights",
+            "title": "主要インサイト",
+            "count": 5,
+            "description": "優先度順。各インサイトに具体的な発言や行動の根拠を付記"
+          },
+          {
+            "id": "common_patterns",
+            "title": "共通パターン",
+            "description": "3人に共通する行動パターン、ニーズ、課題"
+          },
+          {
+            "id": "surprising_findings",
+            "title": "意外な発見",
+            "description": "仮説では想定していなかった発見やユニークな視点"
+          },
+          {
+            "id": "hypothesis_validation",
+            "title": "仮説の検証結果",
+            "description": "5つの仮説それぞれの支持/部分的支持/不支持の判定と根拠"
+          },
+          {
+            "id": "needs_structure",
+            "title": "ユーザーニーズの構造化",
+            "categories": ["機能的ニーズ", "感情的ニーズ", "社会的ニーズ"],
+            "priority_levels": ["高", "中", "低"]
+          },
+          {
+            "id": "action_proposals",
+            "title": "アクション提案",
+            "count": 5,
+            "fields": ["提案内容", "期待される効果", "実施の難易度"]
+          },
+          {
+            "id": "future_research",
+            "title": "今後のリサーチ課題",
+            "description": "さらに調査が必要な領域、追加の仮説、推奨リサーチ手法"
+          }
+        ]
+      }
+    ]
+  },
+  "output_rules": {
+    "language": "ja",
+    "phase_separator": "---",
+    "phase_header_format": "【Phase {N}/5: {phase_name}】",
+    "completion_message": {
+      "summary": "全体のサマリーを3行以内で提示",
+      "follow_up_suggestions": [
+        "特定のペルソナをさらに深掘りしますか？",
+        "追加の仮説を検証しますか？",
+        "別の角度からリサーチをやり直しますか？",
+        "特定のインサイトについて詳しく分析しますか？"
+      ]
+    }
+  }
+}
